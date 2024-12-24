@@ -1,0 +1,43 @@
+<div class="container main_container mt-4">
+<div class="header">
+    <p class="calc_title">Polynôme</p>
+    <div class="container_theme-selector">
+      <p class="ptheme mt-4">THEME</p>
+      <div class="selector-container">
+        <div class="positions-theme">
+          <p class="pposition">1</p>
+          <p class="pposition">2</p>
+          <p class="pposition">3</p>
+        </div>
+        <div class="input-range">
+          <div class="container-balls">
+            <div [ngClass]="selector === 1 ? 'ball-selected' : 'ball-noselected'" (click)="switch(1)"></div>
+            <div [ngClass]="selector === 2 ? 'ball-selected' : 'ball-noselected'" (click)="switch(2)"></div>
+            <div [ngClass]="selector === 3 ? 'ball-selected' : 'ball-noselected'" (click)="switch(3)"></div>
+          </div>       
+        </div>
+      </div>
+    </div>
+    
+  </div>
+<div class="keyboard-container mt-3">
+    <div class="keyboard">
+        <div class="login-container">
+            <h2 class="titre">Connexion</h2>
+            <form>
+              <div class="form-group">
+                <label for="username">Email</label>
+                <input type="text" id="username" class="form-control" name="username" required />
+              </div>
+              <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" class="form-control"  name="password" required />
+              </div>
+              <button class="btn-connect">Connecter</button>
+              <button class="btn-connect" (click)="inscrt()">Créer un compte</button>
+            </form>
+          </div>
+          
+    </div>
+  </div>
+</div>  
