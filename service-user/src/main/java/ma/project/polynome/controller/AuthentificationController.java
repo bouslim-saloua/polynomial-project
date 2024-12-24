@@ -9,6 +9,7 @@ import ma.project.polynome.entity.Role;
 import ma.project.polynome.entity.Utilisateur;
 import ma.project.polynome.payload.request.LoginRequest;
 import ma.project.polynome.payload.request.SignupRequest;
+import ma.project.polynome.payload.request.UtilisateurGetDto;
 import ma.project.polynome.payload.response.JwtResponse;
 import ma.project.polynome.payload.response.MessageResponse;
 import ma.project.polynome.repository.RoleRepository;
@@ -20,6 +21,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -62,14 +65,12 @@ userDetails.getNom(), userDetails.getPrenom(),roles));
 
 @PostMapping("/signup")
 public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
-    // Check if email is already in use
     if (userRepository.existsByEmail(signUpRequest.getEmail())) {
         return ResponseEntity
                 .badRequest()
                 .body(new MessageResponse("Error: Email is already in use!"));
     }
 
-    // Create new user instance
     Utilisateur user = new Utilisateur(signUpRequest.getNom(), 
                                        signUpRequest.getPrenom(), 
                                        signUpRequest.getEmail(),
@@ -78,7 +79,6 @@ public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRe
     Set<String> strRoles = signUpRequest.getRole();
     Set<Role> roles = new HashSet<>();
 
-    // Assign roles based on the provided input
     if (strRoles == null) {
         Role userRole = roleRepository.findByName(ERole.ROLE_USER);
         if(userRole == null) 
@@ -103,13 +103,20 @@ public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRe
         });
     }
 
-    // Set roles for the user
     user.setRoles(roles);
 
-    // Save the user to the database
     userRepository.save(user);
 
-    // Return success response
     return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
 }
+
+@GetMapping("/{id}")
+public ResponseEntity<?> findUserById(@PathVariable long id){
+	Utilisateur utilisateur = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found !!"));
+	UtilisateurGetDto uGet = new UtilisateurGetDto(utilisateur.getId(),
+			utilisateur.getNom(),
+			utilisateur.getPrenom(),
+			utilisateur.getEmail());
+	return new ResponseEntity<>(uGet, HttpStatus.OK);}
+
 }
