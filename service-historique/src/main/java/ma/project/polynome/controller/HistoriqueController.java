@@ -31,14 +31,13 @@ public class HistoriqueController {
 	@Autowired
 	CalculService calculService;
 	
-	@GetMapping(value = "/historiques", produces = {"/application/json"})
-	public ResponseEntity<Object> findAll() {
+	@GetMapping("/historiques")
+	public ResponseEntity<List<Historique>> findAll() {
 		try {
 			List<Historique> historiques = historiqueRepository.findAll();
-			return ResponseEntity.ok(historiques);
+			return ResponseEntity.ok().body(historiques);
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-					.body("Error fetching historiques : " + e.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 	}
 	

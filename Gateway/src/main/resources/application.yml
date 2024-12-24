@@ -1,12 +1,16 @@
 spring:
   cloud:
     gateway:
-        routes:
-          - id: r1
-            uri: http://localhost:8088
-            predicates:
-              - Path=/users/**
-          - id: r2
-            uri: http://localhost:8089
-            predicates:
-              - Path=/calcule/**
+      routes:
+        - id: r1
+          uri: http://localhost:8088
+          predicates:
+            - Path=/api/auth/**
+        - id: r2
+          uri: http://localhost:8089
+          predicates:
+            - Path=/historiques/**
+        - id: r3
+          uri: http://localhost:8090
+          predicates:
+            - Path=/calcule/**
