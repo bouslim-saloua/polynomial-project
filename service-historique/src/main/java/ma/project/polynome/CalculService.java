@@ -6,6 +6,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient(name="SERVICE-CALCUL-POLYNOMIAL")
 public interface CalculService {
-	@GetMapping(path="/")
+	@GetMapping(path="/calcule/{id}")
 	public Calcul calculById(@PathVariable Long id);
 }
