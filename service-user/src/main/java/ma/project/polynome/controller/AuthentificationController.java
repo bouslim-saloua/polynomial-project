@@ -32,17 +32,22 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @RestController
 @RequestMapping("/api/auth")
 public class AuthentificationController {
-	@Autowired
+
 	       AuthenticationManager authenticationManager;
-	@Autowired
 	       UtilisateurRepository userRepository;
-	@Autowired
+
 	       RoleRepository roleRepository;
-	@Autowired
 	PasswordEncoder encoder;
-	@Autowired
 	       JwtUtils jwtUtils;
 
+           public AuthentificationController(AuthenticationManager authenticationManager,UtilisateurRepository userRepository,RoleRepository roleRepository,
+                                             PasswordEncoder encoder,JwtUtils jwtUtils) {
+               this.authenticationManager = authenticationManager;
+               this.userRepository = userRepository;
+               this.roleRepository = roleRepository;
+               this.encoder = encoder;
+               this.jwtUtils = jwtUtils;
+           }
 
 //signIn
 

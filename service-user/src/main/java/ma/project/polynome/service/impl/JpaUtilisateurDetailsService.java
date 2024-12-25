@@ -11,13 +11,17 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 @Service
 public class JpaUtilisateurDetailsService implements UserDetailsService{
     
 final UtilisateurRepository utilisateurRepository;
 
-@Override
+    public JpaUtilisateurDetailsService(UtilisateurRepository utilisateurRepository) {
+        this.utilisateurRepository = utilisateurRepository;
+    }
+
+    @Override
 public CustomUtilisateurDetails loadUserByUsername(String username){
     Supplier<UsernameNotFoundException> s = () -> new UsernameNotFoundException("Problem during authentication!");
 

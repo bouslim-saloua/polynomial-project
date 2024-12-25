@@ -18,8 +18,7 @@ import lombok.Setter;
 import ma.project.polynome.Calcul;
 import ma.project.polynome.Utilisateur;
 
-@Getter
-@Setter
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -41,4 +40,52 @@ public class Historique {
 	@Transient
 	@ManyToOne
 	private Calcul calcul;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Date getDateCreation() {
+		return dateCreation;
+	}
+
+	public void setDateCreation(Date dateCreation) {
+		this.dateCreation = dateCreation;
+	}
+
+	public Long getUtilisateurId() {
+		return utilisateurId;
+	}
+
+	public void setUtilisateurId(Long utilisateurId) {
+		this.utilisateurId = utilisateurId;
+	}
+
+	public Long getCalculId() {
+		return calculId;
+	}
+
+	public void setCalculId(Long calculId) {
+		this.calculId = calculId;
+	}
+
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
+	}
+
+	public Calcul getCalcul() {
+		return calcul;
+	}
+
+	public void setCalcul(Calcul calcul) {
+		this.calcul = calcul;
+	}
 }
