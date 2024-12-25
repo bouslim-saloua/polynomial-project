@@ -1,0 +1,53 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700&family=League+Spartan:wght@700&family=Outfit:wght@400;700&display=swap");
+:root {
+  --Background: hsl(222, 26%, 31%);
+  --Text: hsl(0, 0%, 100%);
+  --Keypad: hsl(223, 31%, 20%);
+  --Ball: hsl(6, 63%, 50%);
+  --Screen: hsl(224, 36%, 15%);
+  --Key: hsl(30, 25%, 89%);
+  --KeyShadow: hsl(28, 16%, 65%);
+  --Del: hsl(225, 21%, 49%);
+  --DelShadow: hsl(224, 28%, 35%);
+  --Equal: hsl(6, 63%, 50%);
+  --EqualShadow: hsl(6, 70%, 34%);
+  --Numbers: hsl(221, 14%, 31%);
+  --EqualText: hsl(0, 0%, 100%);
+}
+:root[theme="2"] {
+  --Background: hsl(0, 0%, 90%);
+  --Text: hsl(60, 10%, 19%);
+  --Keypad: hsl(0, 5%, 81%);
+  --Ball: hsl(25, 98%, 40%);
+  --Screen: hsl(0, 0%, 93%);
+  --Key: hsl(28, 16%, 65%);
+  --KeyShadow: hsl(35, 11%, 61%);
+  --Del: hsl(185, 42%, 37%);
+  --DelShadow: hsl(185, 58%, 25%);
+  --Equal: hsl(25, 98%, 40%);
+  --EqualShadow: hsl(25, 99%, 27%);
+  --Numbers: hsl(60, 10%, 19%);
+  --EqualText: hsl(0, 0%, 100%);
+}
+:root[theme="3"] {
+  --Background: hsl(268, 75%, 9%);
+  --Text: hsl(52, 100%, 62%);
+  --Keypad: hsl(268, 71%, 12%);
+  --Ball: hsl(176, 100%, 44%);
+  --Screen: hsl(268, 71%, 12%);
+  --Key: hsl(268, 47%, 21%);
+  --KeyShadow: hsl(290, 70%, 36%);
+  --Del: hsl(281, 89%, 26%);
+  --DelShadow: hsl(285, 91%, 52%);
+  --Equal: hsl(176, 100%, 44%);
+  --EqualShadow: hsl(177, 92%, 70%);
+  --Numbers: hsl(52, 100%, 62%);
+  --EqualText: hsl(268, 75%, 9%);
+}
+
+body {
+  // font-family: 'Barlow Semi Condensed', sans-serif;
+  // font-family: 'Outfit', sans-serif;
+  font-family: "League Spartan", sans-serif;
+  background-color: var(--Background);
+}

@@ -1,0 +1,337 @@
+.header{
+    display: flex;
+    justify-content: space-around;
+  }
+  .main_container{
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+  .calc_title{
+    font-size: 2rem;
+    color: var(--Text);
+    position: relative;
+    top: 1rem
+  }
+  .container_theme-selector{
+    display: flex;
+  }
+  .ptheme{
+    font-size: 0.7rem;
+    color: var(--Text);
+    position: relative;
+    top: 3px;
+  }
+  .positions-theme{
+    display: flex;
+    justify-content: space-around;
+    width: 5rem;
+    margin-left: 1.5rem;
+  }
+  .btn-connect {
+    background-color: var(--Equal);
+    color: var(--EqualText);
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 1rem;
+    align-self: center;
+  }
+  
+  .btn-connect:hover {
+    background-color: var(--EqualShadow);
+  }
+  
+  .pposition{
+    font-size: 0.7rem;
+    color: var(--Text);
+    margin-bottom: 5px;
+  }
+  .pposition:hover{
+    cursor: default;
+  }
+  .input-range{
+    width: 5rem;
+    height: 1.5rem;
+    background-color: var(--Keypad);
+    margin-left: 1.5rem;   
+    border-radius: 20px;   
+  }
+  .input-range:hover{
+    cursor: pointer;
+  }
+  .ball-selected{
+    margin-top: 2.6px;
+    height: 1.2rem;
+    width: 1.2rem;
+    background-color: var(--Ball);
+    border-radius: 50%;
+  }
+  .ball-noselected{
+    margin-top: 2.6px;
+    height: 1.2rem;
+    width: 1.2rem;
+    background-color: var(--Keypad);
+    border-radius: 50%;
+  }
+  .container-balls{
+    display: flex;
+    gap: 6px;
+    padding-left: 5px;
+  }
+  .screen-container{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;  
+    justify-items: center; 
+  }
+  .screen{
+    background-color: var(--Screen);
+    width: 60%;
+    height: 6rem;
+    border-radius: 10px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 2rem;   
+  }
+  .pscreen{
+    color: var(--Text);
+    font-size: 3rem;
+    position: relative;
+    top: 0.7rem;
+  }
+  .keyboard-container{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;  
+    justify-items: center; 
+  }
+  .keyboard{
+    background-color: var(--Keypad);
+    width: 60%;
+    height: 38rem;
+    border-radius: 10px;
+    padding: 1.5rem;
+    padding-left: 2rem;
+  
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-areas: 
+    "seven eight nine del"
+    "four five six plus"
+    "one two three minus"
+    "dott zeroo divide product"
+    "reset reset equal equal";
+     gap: 10px;
+  }
+  
+  .gen{
+    width: 90%;
+    height: 80%;  
+    background-color: var(--Key);
+    border-radius: 10px;
+    border-bottom: 3px solid var(--KeyShadow);
+    font-size: 2.2rem;
+    color: var(--Numbers);
+    text-align: center;
+    user-select: none;
+  }
+  
+  .gen:hover{
+    cursor: pointer;
+    opacity: 0.8;
+  }
+  
+  .del:hover{
+    cursor: pointer;
+    opacity: 0.8;
+  }
+  .reset:hover{
+    cursor: pointer;
+    opacity: 0.8;
+  }
+  .equal:hover{
+    cursor: pointer;
+    opacity: 0.8;
+  }
+  
+  .del{
+    width: 90%;
+    height: 80%;  
+    background-color: var(--Del);
+    border-radius: 10px;
+    border-bottom: 3px solid var(--DelShadow);
+    font-size: 1.8rem;
+    color: hsl(0, 0%, 100%);
+    text-align: center;
+    padding-top: 5px;
+    user-select: none;
+  }
+  .reset{
+    width: 95%;
+    height: 80%;  
+    background-color: var(--Del);
+    border-radius: 10px;
+    border-bottom: 3px solid var(--DelShadow);
+    font-size: 1.8rem;
+    color: hsl(0, 0%, 100%);
+    text-align: center;
+    padding-top: 5px;
+    user-select: none;
+  }
+  .equal{
+    width: 95%;
+    height: 80%;  
+    background-color: var(--Equal);
+    border-radius: 10px;
+    border-bottom: 3px solid var(--EqualShadow);
+    font-size: 1.8rem;
+    color: var(--EqualText);
+    text-align: center;
+    padding-top: 5px;
+    user-select: none;
+  }
+  
+  
+  .one{
+    grid-area: one;
+  }
+  .two{
+    grid-area: two;
+  }
+  .three{
+    grid-area: three;
+  }
+  .four{
+    grid-area: four;
+  }
+  .five{
+    grid-area: five;
+  }
+  .six{
+    grid-area: six;
+  }
+  .seven{
+    grid-area: seven;
+  }
+  .eight{
+    grid-area: eight;
+  }
+  .nine{
+    grid-area: nine;
+  }
+  .zeroo{
+    grid-area: zeroo;
+  }
+  .del{
+    grid-area: del;
+  }
+  .minus{
+    grid-area: minus;
+  }
+  .plus{
+    grid-area: plus;
+  }
+  .divide{
+    grid-area: divide;
+  }
+  .product{
+    grid-area: product;
+  }
+  .dott{
+    grid-area: dott;
+  }
+  .reset{
+    grid-area: reset;
+  }
+  .equal{
+    grid-area: equal;
+  }
+  
+  @media(min-width: 768px) and (max-width: 1199px)
+  {
+    .pscreen{
+        font-size: 30px;
+    }
+  }
+  
+  @media (max-width: 767px)
+  {
+    .screen{
+        width: 90%;
+    }
+    .keyboard{
+        width: 90%;
+    }
+    .pscreen{
+        font-size: 30px;
+    }
+  }
+  
+  @media(min-width: 441px) and (max-width: 520px)
+  {
+    .pscreen{
+        font-size: 20px;
+    }
+  }
+  @media (max-width: 440px)
+  {
+    .del{
+        font-size: 1rem;
+        padding-top: 15px;      
+    }
+    .pscreen{
+        font-size: 20px;
+    }
+  }
+  /* Style de la carte d'historique */
+  .history-container {
+    background-color: var(--Keypad); /* Utiliser la couleur de fond du thème */
+    color: var(--Text); /* Utiliser la couleur du texte du thème */
+    padding: 10px;
+    border-radius: 8px;
+  }
+  
+  .history-item {
+    padding: 8px;
+    margin-bottom: 6px;
+    border-bottom: 1px solid var(--KeyShadow);
+  }
+  
+  .history-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 12px;
+  }
+  .login-container {
+      width: 390px;
+      margin: 20px 20px;
+      padding: 20px 20px;
+      border-radius: 8px;
+      color: var(--Text);
+      
+      
+    }
+    .titre{
+      text-align: center;
+    }
+    
+    .form-group {
+      margin-bottom: 15px;
+      
+      
+    }
+    
+    button {
+      width: 100%;
+    }
+    .keyboard{
+      width: 40%;
+  }
+    

@@ -1,0 +1,70 @@
+<div class="container main_container mt-4">
+    <!-- Section Header -->
+    <div class="header">
+      <p class="calc_title">Polynôme</p>
+      <div class="container_theme-selector">
+        <p class="ptheme mt-4">THEME</p>
+        <div class="selector-container">
+          <div class="positions-theme">
+            <p class="pposition">1</p>
+            <p class="pposition">2</p>
+            <p class="pposition">3</p>
+          </div>
+          <div class="input-range">
+            <div class="container-balls">
+              <div [ngClass]="selector === 1 ? 'ball-selected' : 'ball-noselected'" (click)="switch(1)"></div>
+              <div [ngClass]="selector === 2 ? 'ball-selected' : 'ball-noselected'" (click)="switch(2)"></div>
+              <div [ngClass]="selector === 3 ? 'ball-selected' : 'ball-noselected'" (click)="switch(3)"></div>
+            </div>       
+          </div>
+        </div>
+      </div>
+      <button class="btn-connect" (click)="nav()">Connecter</button>
+      
+    </div>
+  
+    <!-- Ecran principal -->
+    <div class="screen-container mt-2">
+      <div class="screen">
+        <p class="pscreen" *ngIf="reset">0</p>
+        <p class="pscreen" *ngIf="!reset">{{operator1 }}</p>
+      </div>
+    </div>
+  
+    <!-- Clavier -->
+    <div class="keyboard-container mt-3">
+      <div class="keyboard">
+        <div class="seven gen" (click)="addDigit('7')">7</div>
+        <div class="eight gen" (click)="addDigit('8')">8</div>
+        <div class="nine gen" (click)="addDigit('9')">9</div>
+        <div class="del" (click)="Del()">DEL</div>
+        <div class="four gen" (click)="addDigit('4')">4</div>
+        <div class="five gen" (click)="addDigit('5')">5</div>
+        <div class="six gen" (click)="addDigit('6')">6</div>
+        <div class="plus gen" (click)="addDigit('+')">+</div>
+        <div class="one gen" (click)="addDigit('1')">1</div>
+        <div class="two gen" (click)="addDigit('2')">2</div>
+        <div class="three gen" (click)="addDigit('3')">3</div>
+        <div class="minus gen" (click)="addDigit('-')">-</div>
+        <div class="dott gen" (click)="addDigit('x')">x</div>
+        <div class="zeroo gen" (click)="addDigit('0')">0</div>
+        <div class="divide gen" (click)="addDigit('^')">^</div>
+        <div class="product gen" (click)="addDigit('*')">*</div>
+        <div class="reset" (click)="Reset()">factoriser</div>
+        <div class="equal" (click)="Equal()">racines</div>
+      </div>
+    </div>
+  
+    <!-- Section Historique -->
+    <div class="history-container mt-4">
+      <div class="history-card">
+        <p class="history-title">Historique des Calculs</p>
+        <div class="history-list">
+          <div class="history-item">
+            <p>historique</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
