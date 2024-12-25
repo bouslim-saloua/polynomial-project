@@ -1,0 +1,119 @@
+version: '3.8'
+
+services:
+  eureka-server:
+    build:
+      context: ./Eureka-server
+      dockerfile: Dockerfile
+    ports:
+      - "8761:8761"
+
+  gateway:
+    build:
+      context: ./Gateway
+      dockerfile: Dockerfile
+    ports:
+      - "8888:8888"
+    depends_on:
+      - eureka-server
+
+  service-calcul-polynomial:
+    build:
+      context: ./service-calcul-polynomial
+      dockerfile: Dockerfile
+    ports:
+      - "8090:8090"
+    depends_on:
+      - eureka-server
+      - database-calcul
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://database-calcul:3306/calcul_db
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD:
+
+  service-historique:
+    build:
+      context: ./service-historique
+      dockerfile: Dockerfile
+    ports:
+      - "8089:8089"
+    depends_on:
+      - eureka-server
+      - database-historique
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://database-historique:3306/service-historique
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD:
+
+  service-user:
+    build:
+      context: ./service-user
+      dockerfile: Dockerfile
+    ports:
+      - "8088:8088"
+    depends_on:
+      - eureka-server
+      - database-user
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://database-user:3306/service_user
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD:
+
+  model-service:
+    build:
+      context: ./model
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+
+  # Databases for each service
+  database-calcul:
+    image: mysql:8
+    container_name: mysql-db-calcul
+    environment:
+      MYSQL_ROOT_PASSWORD:
+      MYSQL_DATABASE: calcul_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD:
+    ports:
+      - "3307:3306" # Expose a unique port if needed
+    volumes:
+      - mysql-data-calcul:/var/lib/mysql
+
+  database-historique:
+    image: mysql:8
+    container_name: mysql-db-historique
+    environment:
+      MYSQL_ROOT_PASSWORD:
+      MYSQL_DATABASE: service-historique
+      MYSQL_USER: root
+      MYSQL_PASSWORD:
+    ports:
+      - "3308:3306"
+    volumes:
+      - mysql-data-historique:/var/lib/mysql
+
+  database-user:
+    image: mysql:8
+    container_name: mysql-db-user
+    environment:
+      MYSQL_ROOT_PASSWORD:
+      MYSQL_DATABASE: service_user
+      MYSQL_USER: root
+      MYSQL_PASSWORD:
+    ports:
+      - "3309:3306"
+    volumes:
+      - mysql-data-user:/var/lib/mysql
+
+volumes:
+  mysql-data-calcul:
+  mysql-data-historique:
+  mysql-data-user:
