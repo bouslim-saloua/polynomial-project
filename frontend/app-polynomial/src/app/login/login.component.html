@@ -1,6 +1,6 @@
 <div class="container main_container mt-4">
 <div class="header">
-    <p class="calc_title">Polynôme</p>
+  <a (click)="nav2()" class="calc_title">Polynôme</a>
     <div class="container_theme-selector">
       <p class="ptheme mt-4">THEME</p>
       <div class="selector-container">
@@ -20,24 +20,29 @@
     </div>
     
   </div>
+  
 <div class="keyboard-container mt-3">
     <div class="keyboard">
         <div class="login-container">
             <h2 class="titre">Connexion</h2>
-            <form>
+
+            <form  (submit)="login()">
+              
               <div class="form-group">
                 <label for="username">Email</label>
-                <input type="text" id="username" class="form-control" name="username" required />
+                <input type="text" id="email"  class="form-control" name="email" [(ngModel)]="email" required />
               </div>
               <div class="form-group">
                 <label for="password">Mot de passe</label>
-                <input type="password" id="password" class="form-control"  name="password" required />
+                <input type="password" id="password" class="form-control" [(ngModel)]="password" name="password" required />
               </div>
               <button class="btn-connect">Connecter</button>
               <button class="btn-connect" (click)="inscrt()">Créer un compte</button>
+              
             </form>
           </div>
           
     </div>
   </div>
+  <p *ngIf="errorMessage" class="error-message mt-3" style="color: red; text-align: center;">{{ errorMessage }} </p>
 </div>  

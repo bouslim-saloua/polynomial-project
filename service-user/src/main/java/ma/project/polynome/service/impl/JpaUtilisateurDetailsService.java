@@ -14,18 +14,18 @@ import org.springframework.stereotype.Service;
 //@RequiredArgsConstructor
 @Service
 public class JpaUtilisateurDetailsService implements UserDetailsService{
-    
-final UtilisateurRepository utilisateurRepository;
 
-    public JpaUtilisateurDetailsService(UtilisateurRepository utilisateurRepository) {
-        this.utilisateurRepository = utilisateurRepository;
-    }
+	final UtilisateurRepository utilisateurRepository;
 
-    @Override
-public CustomUtilisateurDetails loadUserByUsername(String username){
-    Supplier<UsernameNotFoundException> s = () -> new UsernameNotFoundException("Problem during authentication!");
+	public JpaUtilisateurDetailsService(UtilisateurRepository utilisateurRepository) {
+		this.utilisateurRepository = utilisateurRepository;
+	}
 
-Utilisateur utilisateur = utilisateurRepository.findByEmail(username).orElseThrow(s);
-return CustomUtilisateurDetails.build(utilisateur);
-}
+	@Override
+	public CustomUtilisateurDetails loadUserByUsername(String username){
+		Supplier<UsernameNotFoundException> s = () -> new UsernameNotFoundException("Problem during authentication!");
+
+		Utilisateur utilisateur = utilisateurRepository.findByEmail(username).orElseThrow(s);
+		return CustomUtilisateurDetails.build(utilisateur);
+	}
 }

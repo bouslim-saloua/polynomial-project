@@ -198,6 +198,9 @@
     user-select: none;
 }
 
+a{
+    text-decoration: none;
+}
 
 .one{
     grid-area: one;
@@ -309,3 +312,13 @@
     font-weight: bold;
     margin-bottom: 12px;
   }
+.info-box{
+    color: var(--Text);
+    text-align: center;
+}
+
+.error-message {
+    color: red; 
+    text-align: center;
+    justify-items: center; 
+}

@@ -19,33 +19,38 @@
           </div>
         </div>
         
+        
       </div>
+      
+    
     <div class="keyboard-container mt-3">
         <div class="keyboard">
             <div class="login-container">
                 <h2 class="titre">Créer un compte</h2>
-                <form>
+                <form (ngSubmit)="onSubmit()" #inscriptionForm="ngForm">
                   <div class="form-group">
                     <label for="username">Nom</label>
-                    <input type="text" id="name" class="form-control" name="name" required />
+                    <input type="text" id="name" class="form-control" name="name" required [(ngModel)]="userData.nom" />
                   </div>
                   <div class="form-group">
                     <label for="username">Prénom</label>
-                    <input type="text" id="prenom" class="form-control" name="prenom" required />
+                    <input type="text" id="prenom" class="form-control" name="prenom"  [(ngModel)]="userData.prenom" required />
                   </div>
                   <div class="form-group">
                     <label for="username">Email</label>
-                    <input type="text" id="email" class="form-control" name="email" required />
+                    <input type="text" id="email" class="form-control" name="email" [(ngModel)]="userData.email"  required />
                   </div>
                   <div class="form-group">
                     <label for="password">Mot de passe</label>
-                    <input type="password" id="password" class="form-control"  name="password" required />
+                    <input type="password" id="password" class="form-control"  name="password" [(ngModel)]="userData.password" required />
                   </div>
                   <div class="form-group">
                     <label for="password">Confirmer mot de passe</label>
-                    <input type="password" id="confirme" class="form-control"  name="confirme" required />
+                    <input type="password" id="confirme" class="form-control"  name="confirme"  [(ngModel)]="confirmPassword"  required />
                   </div>
-                  <button class="btn-connect">Créer</button>
+                  <button type="submit" class="btn-connect" >
+                    <span >Créer</span>
+                  </button>
                 </form>
               </div>
               
