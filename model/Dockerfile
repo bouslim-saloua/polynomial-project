@@ -1,20 +1,23 @@
-# Use a base image with Python
+# Utiliser une image de base avec Python
 FROM python:3.9-slim
 
-# Set the working directory
+# Définir le répertoire de travail
 WORKDIR /app
 
-# Copy the requirements file if you have dependencies
+# Copier le fichier des dépendances
 COPY requirements.txt ./
 
-# Install dependencies
+# Ajouter SymPy et Flask au fichier requirements.txt si ce n'est pas déjà fait
+RUN echo "sympy\nflask" >> requirements.txt
+
+# Installer les dépendances
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the Python script
+# Copier le script Python
 COPY script.py ./
 
-# Expose the port if the script opens one (optional)
+# Exposer le port si le script ouvre un serveur Flask
 EXPOSE 5000
 
-# Run the Python script
+# Lancer le script Python
 CMD ["python", "script.py"]

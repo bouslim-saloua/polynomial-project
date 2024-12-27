@@ -16,6 +16,9 @@ services:
       - "8888:8888"
     depends_on:
       - eureka-server
+    environment: 
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://eureka-server:8761/eureka/
+
 
   service-calcul-polynomial:
     build:
@@ -27,9 +30,12 @@ services:
       - eureka-server
       - database-calcul
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://database-calcul:3306/calcul_db
+      SPRING_DATASOURCE_URL: jdbc:mysql://database-calcul:3306/service-calcul
       SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD:
+      SPRING_DATASOURCE_PASSWORD: 
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://eureka-server:8761/eureka/
+
+    command: /wait-for-it.sh database-calcul:3306 --timeout=60 --strict -- java -jar service-calcul-polynomial.jar
 
   service-historique:
     build:
@@ -43,7 +49,9 @@ services:
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://database-historique:3306/service-historique
       SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD:
+      SPRING_DATASOURCE_PASSWORD: 
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://eureka-server:8761/eureka/
+    command: /wait-for-it.sh database-historique:3306 --timeout=60 --strict -- java -jar service-historique.jar
 
   service-user:
     build:
@@ -57,7 +65,11 @@ services:
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://database-user:3306/service_user
       SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD:
+      SPRING_DATASOURCE_PASSWORD: 
+      SPRING_PROFILES_ACTIVE: dev
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://eureka-server:8761/eureka/
+
+    command: /wait-for-it.sh database-user:3306 --timeout=60 --strict && java -jar service-user.jar
 
   model-service:
     build:
@@ -75,39 +87,36 @@ services:
 
   # Databases for each service
   database-calcul:
-    image: mysql:8
+    image: mysql:5.7
     container_name: mysql-db-calcul
     environment:
-      MYSQL_ROOT_PASSWORD:
-      MYSQL_DATABASE: calcul_db
-      MYSQL_USER: user
-      MYSQL_PASSWORD:
+      MYSQL_ROOT_PASSWORD: 
+      MYSQL_DATABASE: service-calcul
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
     ports:
-      - "3307:3306" # Expose a unique port if needed
+      - "3307:3306"
     volumes:
       - mysql-data-calcul:/var/lib/mysql
 
   database-historique:
-    image: mysql:8
+    image: mysql:5.7
     container_name: mysql-db-historique
     environment:
-      MYSQL_ROOT_PASSWORD:
+      MYSQL_ROOT_PASSWORD: 
       MYSQL_DATABASE: service-historique
-      MYSQL_USER: root
-      MYSQL_PASSWORD:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
     ports:
       - "3308:3306"
     volumes:
       - mysql-data-historique:/var/lib/mysql
 
   database-user:
-    image: mysql:8
+    image: mysql:5.7
     container_name: mysql-db-user
     environment:
-      MYSQL_ROOT_PASSWORD:
+      MYSQL_ROOT_PASSWORD: 
       MYSQL_DATABASE: service_user
-      MYSQL_USER: root
-      MYSQL_PASSWORD:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
     ports:
       - "3309:3306"
     volumes:
