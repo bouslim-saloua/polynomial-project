@@ -28,7 +28,12 @@ public class CalculService {
     public Map<String, Object> factoriser(String polynome) {
         // Appeler la méthode pour factoriser et sauvegarder les résultats
         Map<String, Object> result = envoyerRequeteAuMicroservice(polynome, "/factorisation");
-        sauvegarderCalcul(polynome, (String) result.get("factorisation"), null); // Sauvegarde la factorisation dans la base de données
+        String resultatFactorisation = (String) result.get("factorisation");
+        Long id = sauvegarderCalcul(polynome, resultatFactorisation, null);
+
+        // Ajouter l'ID à la réponse
+        result.put("id", id);
+
         return result;
     }
 
@@ -42,16 +47,24 @@ public class CalculService {
         String racinesStr = "";
         if (racinesObj instanceof ArrayList) {
             // Si c'est une ArrayList, convertissez-la en chaîne
-            racinesStr = String.join(", ", (ArrayList<String>) racinesObj);
-        } else {
-            // Si ce n'est pas une ArrayList, vous pouvez directement l'utiliser
+            ArrayList<?> racinesList = (ArrayList<?>) racinesObj;
+            racinesStr = String.join(", ", racinesList.stream()
+                                                      .map(Object::toString)
+                                                      .toArray(String[]::new));
+        } else if (racinesObj instanceof String) {
+            // Si c'est une chaîne, l'utiliser directement
             racinesStr = (String) racinesObj;
         }
 
         // Sauvegarder les calculs dans la base de données
-        sauvegarderCalcul(polynome, null, racinesStr); // Sauvegarder la chaîne obtenue
+        Long id = sauvegarderCalcul(polynome, null, racinesStr);
+
+        // Ajouter l'ID à la réponse
+        result.put("id", id);
+
         return result;
     }
+
 
 
     // Méthode générique pour envoyer une requête au microservice Python
@@ -79,14 +92,12 @@ public class CalculService {
     }
 
     // Méthode pour sauvegarder le calcul dans la base de données
-    private void sauvegarderCalcul(String polynome, String resultatFactorisation, String resultatRacines) {
+    private Long sauvegarderCalcul(String polynome, String resultatFactorisation, String resultatRacines) {
         // Créer un objet Calcul pour stocker les informations
         Calcul calcul = new Calcul();
         calcul.setPolynome(polynome);
         calcul.setResultatFactorisation(resultatFactorisation);
         calcul.setResultatRacines(resultatRacines);
-
-        // Sauvegarder dans la base de données
-        calculRepository.save(calcul); // Sauvegarde le calcul dans la base de données
-    }
+        return calculRepository.save(calcul).getId();
+        }
 }

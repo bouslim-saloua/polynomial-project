@@ -1,10 +1,12 @@
 package ma.project.polynome.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -91,6 +93,7 @@ public class HistoriqueController {
 			
 			historique.setUtilisateurId(utilisateurId);
 			historique.setCalculId(calculId);
+			historique.setDateCreation(new Date()); 
 			Historique savedHistorique = historiqueRepository.save(historique);
 			return ResponseEntity.ok(savedHistorique);
 		} catch (Exception e) {
