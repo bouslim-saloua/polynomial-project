@@ -169,7 +169,11 @@ docker-compose up --build
  ```sh
   ng serve --open
  ```
+
 ## Video Demonstration
 
-
-
+### Contributors
+This project was made possible through the collaborative efforts of the following contributors:
+- BOULAMAAT Amina ([GitHub] (https://github.com/amina-bl))
+- BOUSLIM Saloua ([Github] (https://github.com/bouslim-saloua))
+- EL BAHRAOUY Fatiha ([Github] (https://github.com/Fatielbah))
