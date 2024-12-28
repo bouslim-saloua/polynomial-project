@@ -53,7 +53,7 @@ This project develops an automated tool that calculates the roots of polynomials
 └── docker-compose.yml
  
 ```
-![structure](https://github.com/user-attachments/assets/5dfec6d0-f7cc-4933-92bd-0c814245efd5)
+![architucture](https://github.com/user-attachments/assets/ca7fa3ce-01ce-47b6-b4a6-8b575adcf8e3)
 
 ---
 The application also offers a symbolic factoring feature to simplify polynomials while providing numerical solutions.
